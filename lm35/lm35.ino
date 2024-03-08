@@ -19,7 +19,7 @@
 Servo servo1;
 Servo servo2;
 
-int redFrequency =0;
+int redFrequency = 0;
 int greenFrequency = 0;
 int blueFrequency = 0;
 
@@ -88,7 +88,6 @@ void setup() {
   Firebase.reconnectWiFi(true);
 
   Firebase.setDoubleDigits(5);
-  */
 }
 
 void loop() {
@@ -99,7 +98,7 @@ void loop() {
 
 
   
-// Select RED filtered photodiodes and start reading frequency
+  // Select RED filtered photodiodes and start reading frequency
   digitalWrite(S2, LOW);
   digitalWrite(S3, LOW);
   redFrequency = readFrequency();
@@ -155,7 +154,6 @@ void loop() {
     Firebase.setInt(fbdo, "/Warna R/", c);
     delay(200);
   }
-  */
 
   // Menampilkan nilai suhu dan ppm di serial monitor
   Serial.print("Suhu saat ini: ");

@@ -1,6 +1,6 @@
+#include <WiFi.h>
 #include <TCS3200.h>
 #include <ESP32_Servo.h>
-#include <WiFi.h>
 #include <FirebaseESP32.h>
 #include <addons/TokenHelper.h>
 #include <addons/RTDBHelper.h>
@@ -37,7 +37,7 @@ FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
 
-String mainFirebase="";
+String mainFirebase = "";
 
 int a, b, c, d, e; 
 
@@ -81,8 +81,7 @@ void setup() {
 
   config.database_url = DATABASE_URL;
 
-
-  Firebase.begin(DATABASE_URL, API_KEY);
+  Firebase.begin(&config, &auth);
 
   //Comment or pass false value when WiFi reconnection will control by your code or third party library
   Firebase.reconnectWiFi(true);
@@ -132,26 +131,21 @@ void loop() {
 
   // Tunggu beberapa saat sebelum membaca kembali sensor
   delay(1000);
-  int redFrequency = redFrequency; // Replace with actual light intensity reading
-  int greenFrequency = greenFrequency; // Replace with actual pressure reading
-  int blueFrequency = blueFrequency; // Replace with actual voltage reading
-
+  
   a=temperature;
   b=ppm;
-  c=redFrequency
-  d=greenFrequency
-  e=blueFrequency
+  c=redFrequency;
+  d=greenFrequency;
+  e=blueFrequency;
   
   
-  if (Firebase.ready()) 
-  {
-    
+  if (Firebase.ready()) { 
     //Firebase.setInt(fbdo, main, 5);
     Firebase.setInt(fbdo, "/Asap/", a);
     Firebase.setInt(fbdo, "/Suhu/", b);
-    Firebase.setInt(fbdo, "/Warna B/", e);
-    Firebase.setInt(fbdo, "/Warna G/", d);
-    Firebase.setInt(fbdo, "/Warna R/", c);
+    Firebase.setInt(fbdo, "/Warna-B/", e);
+    Firebase.setInt(fbdo, "/Warna-G/", d);
+    Firebase.setInt(fbdo, "/Warna-R/", c);
     delay(200);
   }
 
